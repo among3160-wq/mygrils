@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minta Maaf ke Kamu 🥺💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fce7f3, #e0e7ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      padding: 60px 40px;
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      transition: all .3s ease;
+      animation: fadeIn .5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      color: #db2777;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #4b5563;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s ease;
+    }
+    input[type="text"]:focus {
+      border-color: #db2777;
+    }
+    button {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform .25s ease, background-color .2s ease, box-shadow .2s ease;
+    }
+    #submitName {
+      background-color: #f472b6;
+      color: white;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    #submitName:hover {
+      background-color: #ec4899;
+      box-shadow: 0 4px 10px rgba(244,114,182,0.4);
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    #yesBtn {
+      background-color: #f472b6;
+      color: white;
+      box-shadow: 0 4px 10px rgba(244,114,182,0.4);
+    }
+    #noBtn {
+      background-color: #e5e7eb;
+      color: #111827;
+    }
+    #noBtn:hover {
+      background-color: #d1d5db;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      color: #6b7280;
+      font-size: .95rem;
+    }
+    .footer a {
+      color: #db2777;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .popup {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+      z-index: 9999;
+    }
+    .popup.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .popup-content {
+      background: #fff;
+      padding: 40px 70px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      animation: pop .4s ease;
+      max-width: 520px;
+      width: 90%;
+      position: relative;
+    }
+    @keyframes pop {
+      from { transform: scale(.8); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    .popup h2 {
+      color: #db2777;
+      margin-bottom: .5rem;
+    }
+    .hearts {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .heart {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background-color: #f472b6;
+      transform: rotate(45deg);
+      animation: float 2s ease forwards;
+      opacity: .9;
+    }
+    .heart::before, .heart::after {
+      content:"";
+      position:absolute;
+      width:22px;
+      height:22px;
+      background-color:#f472b6;
+      border-radius:50%;
+    }
+    .heart::before { top:-11px; left:0; }
+    .heart::after  { left:-11px; top:0; }
+    @keyframes float {
+      to {
+        transform: translateY(-150px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    @media (max-width:480px) {
+      .card { padding:28px 20px; }
+      h1 { font-size:1.4rem; }
+      p  { font-size:.95rem; }
+      button { font-size:.9rem; padding: 8px 18px; }
+      .popup-content { padding:32px 28px; max-width:90%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Step 1 -->
+  <div class="card" id="nameCard">
+    <h1>Hai kamu 💕</h1>
+    <p>Boleh aku tau nama panggilan manis kamu? 🥰</p>
+    <input type="text" id="nickname" placeholder="contoh: ayang, beb, panggilan khusus..." />
+    <button id="submitName">Lanjut 💌</button>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="card" id="apologyCard" style="display: none;">
+    <h1>Aku minta maaf 🥺💖</h1>
+    <p id="apologyText">Aku beneran gak bermaksud bikin kamu kesel.</p>
+    <div class="btn-group">
+      <button id="yesBtn">Maafin 💖</button>
+      <button id="noBtn">Enggak 😠</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Made by <a href="https://www.instagram.com/ikyboyzz_?igsh=c21zdnFqcXE2MDZz" target="_blank" rel="noopener">Intagram: @Ikyboyzz_</a> 💖
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2 id="popupTitle"></h2>
+      <p id="popupMsg"></p>
+      <div class="hearts" id="hearts"></div>
+    </div>
+  </div>
+
+  <script>
+    const nameCard      = document.getElementById('nameCard');
+    const apologyCard   = document.getElementById('apologyCard');
+    const nicknameInput = document.getElementById('nickname');
+    const submitName    = document.getElementById('submitName');
+    const apologyText   = document.getElementById('apologyText');
+    const yesBtn        = document.getElementById('yesBtn');
+    const noBtn         = document.getElementById('noBtn');
+    const popup         = document.getElementById('popup');
+    const heartsContainer = document.getElementById('hearts');
+    const popupTitle    = document.getElementById('popupTitle');
+    const popupMsg      = document.getElementById('popupMsg');
+
+    let noScale  = 1.0;
+    let yesScale = 1.0;
+    let nickname = '';
+
+    submitName.addEventListener('click', () => {
+      nickname = nicknameInput.value.trim();
+      if (!nickname) {
+        alert('Isi dulu nama panggilan kamu dong 😳');
+        return;
+      }
+      nameCard.style.display    = 'none';
+      apologyCard.style.display = 'block';
+
+      const apologyTitle = apologyCard.querySelector('h1');
+      apologyTitle.textContent = `${nickname}, aku minta maaf 🥺💖`;
+      apologyText.innerHTML    = `Aku gak bermaksud bikin kamu kesel.<br>Maafin aku, ya? 😢`;
+    });
+
+    noBtn.addEventListener('mouseover', () => {
+      noScale -= 0.1;
+      if (noScale < 0.3) noScale = 0.3;
+      yesScale += 0.1;
+      if (yesScale > 1.8) yesScale = 1.8;
+      noBtn.style.transform  = `scale(${noScale})`;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    noBtn.addEventListener('click', () => {
+      // juga bisa tambahkan suara atau alert lucu
+      noScale -= 0.1;
+      if (noScale < 0.3) noScale = 0.3;
+      yesScale += 0.1;
+      if (yesScale > 1.8) yesScale = 1.8;
+      noBtn.style.transform  = `scale(${noScale})`;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    yesBtn.addEventListener('click', () => {
+      popup.classList.add('active');
+      popupTitle.textContent = `Makasih ya, ${nickname} 💕`;
+      popupMsg.textContent   = `Aku janji gak bakal bikin kamu kesel lagi 🥺✨`;
+      generateHearts();
+      setTimeout(() => {
+        popup.classList.remove('active');
+        noScale  = 1;
+        yesScale = 1;
+        noBtn.style.transform  = 'scale(1)';
+        yesBtn.style.transform = 'scale(1)';
+      }, 5000);
+    });
+
+    function generateHearts() {
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = `${Math.random() * 100 - 50}px`;
+        heart.style.top  = `${Math.random() * 40 - 20}px`;
+        heart.style.animationDelay = `${Math.random() * 0.3}s`;
+        heartsContainer.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    }
+  </script>
+
+</body>
+</html>
